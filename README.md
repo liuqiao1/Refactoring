@@ -8,7 +8,9 @@ This repo records practices for《Refactoring》written by Martin Fowler.
 - variable name: aperformance, aNumber
 - volumCreditsFor => totalVolumeCredits
 - nested function
-- function name: XXXFor
+- function name: XXXFo
+
+- how to write a commit info
 # Some useful links
 - [refactoring.com](https://www.refactoring.com/)
 - [web edition](https://www.informit.com/store/browse/ebooks)

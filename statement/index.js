@@ -89,6 +89,7 @@ const invoices = [
   function getStatementData(invoice){
     let result = {}
       result.customer =  invoice.customer
+      result.totalAmount = usd(totalAmount(invoice.performances))
     //   return result
     return result
   }
@@ -101,7 +102,7 @@ const invoices = [
       result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${usd(totalAmount(invoice.performances))}\n`;
+    result += `Amount owed is ${data.totalAmount})}\n`;
     result += `You earned ${totalVolumeCredits(invoice.performances)} credits\n`;
 
     return result;
