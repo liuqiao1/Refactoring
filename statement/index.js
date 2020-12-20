@@ -86,7 +86,7 @@ const invoices = [
     ;
   }
 
-  function statement (invoice, plays) {
+  function statement (invoice) {
     let result = `Statement for ${invoice.customer}\n`;
   
     for (let perf of invoice.performances) {
