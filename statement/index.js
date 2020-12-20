@@ -87,29 +87,29 @@ const invoices = [
   }
 
   function getStatementData(invoice){
-    //   let result = {}
-    //   result.customer =  
+    let result = {}
+      result.customer =  invoice.customer
     //   return result
-    return invoice
+    return result
   }
 
-  function renderPlainText(data){
+  function renderPlainText(data, invoice){
     let result = `Statement for ${data.customer}\n`;
   
-    for (let perf of data.performances) {
+    for (let perf of invoice.performances) {
       // print line for this order
       result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${usd(totalAmount(data.performances))}\n`;
-    result += `You earned ${totalVolumeCredits(data.performances)} credits\n`;
+    result += `Amount owed is ${usd(totalAmount(invoice.performances))}\n`;
+    result += `You earned ${totalVolumeCredits(invoice.performances)} credits\n`;
 
     return result;
   }
 
   function statement (invoice) {
       const data = getStatementData(invoice)
-      return renderPlainText(data)
+      return renderPlainText(data, invoice)
     // let result = `Statement for ${invoice.customer}\n`;
   
     // for (let perf of invoice.performances) {
