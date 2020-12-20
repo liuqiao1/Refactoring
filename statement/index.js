@@ -69,19 +69,21 @@ const invoices = [
   }
 
   function totalAmountFor(performances){
-      let result = 0;
-      for(let perf of performances){
-        result += amountFor(perf);
-      }
-      return result
+      return performances
+      .reduce((result, perf) => {
+          result += amountFor(perf);
+          return result
+      }, 0)
+      ;
   }
 
   function volumeCreditsFor(performances){
-    let result = 0;
-    for(let perf of performances){
-      result += volumeCreditFor(perf);
-    }
-    return result
+    return performances
+    .reduce((result, perf) => {
+        result += volumeCreditFor(perf);
+        return result
+    }, 0)
+    ;
   }
 
   function statement (invoice, plays) {
