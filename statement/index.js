@@ -86,18 +86,41 @@ const invoices = [
     ;
   }
 
-  function statement (invoice) {
-    let result = `Statement for ${invoice.customer}\n`;
+  function getStatementData(invoice){
+    //   let result = {}
+    //   result.customer =  
+    //   return result
+    return invoice
+  }
+
+  function renderPlainText(data){
+    let result = `Statement for ${data.customer}\n`;
   
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
       // print line for this order
       result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${usd(totalAmount(invoice.performances))}\n`;
-    result += `You earned ${totalVolumeCredits(invoice.performances)} credits\n`;
+    result += `Amount owed is ${usd(totalAmount(data.performances))}\n`;
+    result += `You earned ${totalVolumeCredits(data.performances)} credits\n`;
 
     return result;
+  }
+
+  function statement (invoice) {
+      const data = getStatementData(invoice)
+      return renderPlainText(data)
+    // let result = `Statement for ${invoice.customer}\n`;
+  
+    // for (let perf of invoice.performances) {
+    //   // print line for this order
+    //   result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
+    // }
+
+    // result += `Amount owed is ${usd(totalAmount(invoice.performances))}\n`;
+    // result += `You earned ${totalVolumeCredits(invoice.performances)} credits\n`;
+
+    // return result;
   }
 
 window.onload = function(){
