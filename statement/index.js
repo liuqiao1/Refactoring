@@ -89,14 +89,14 @@ const invoices = [
   function enrichPerformance(aPerformance){
     const result = Object.assign({}, aPerformance);
     result.name = playFor(aPerformance).name
-    result.amount = usd(amountFor(aPerformance))
+    result.amount = amountFor(aPerformance)
     return result;
   }
 
   function getStatementData(invoice){
     let result = {}
     result.customer = invoice.customer
-    result.totalAmount = usd(totalAmount(invoice.performances))
+    result.totalAmount = totalAmount(invoice.performances)
     result.performances = invoice.performances.map(enrichPerformance)
     result.totalVolumeCredit = totalVolumeCredits(invoice.performances)
     return result
@@ -107,10 +107,10 @@ const invoices = [
   
     for (let perf of data.performances) {
       // print line for this order
-      result += `  ${perf.name}: ${perf.amount} (${perf.audience} seats)\n`;
+      result += `  ${perf.name}: ${usd(perf.amount)} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${data.totalAmount}\n`;
+    result += `Amount owed is ${usd(data.totalAmount)}\n`;
     result += `You earned ${data.totalVolumeCredit} credits\n`;
 
     return result;
