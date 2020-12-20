@@ -31,7 +31,7 @@ const invoices = [
   function amountFor(aPerformance){
     let result = 0;
 
-    switch (playFor(aPerformance).type) {
+    switch (aPerformance.play.type) {
         case "tragedy":
           result = 40000;
           if (aPerformance.audience > 30) {
@@ -71,7 +71,7 @@ const invoices = [
   function totalAmount(performances){
       return performances
       .reduce((result, perf) => {
-          result += amountFor(perf);
+          result += perf.amount;
           return result
       }, 0)
       ;
@@ -80,7 +80,7 @@ const invoices = [
   function totalVolumeCredits(performances){
     return performances
     .reduce((result, perf) => {
-        result += volumeCreditsFor(perf);
+        result += perf.volumeCredits;
         return result
     }, 0)
     ;
@@ -88,21 +88,24 @@ const invoices = [
 
   function enrichPerformance(aPerformance){
     const result = Object.assign({}, aPerformance);
-    result.name = playFor(aPerformance).name
-    result.amount = amountFor(aPerformance)
+    result.play = playFor(aPerformance)
+    result.name = result.play.name
+    result.amount = amountFor(result)
+    result.volumeCredits = volumeCreditsFor(result);
     return result;
   }
 
   function createStatementData(invoice){
     let result = {}
     result.customer = invoice.customer
-    result.totalAmount = totalAmount(invoice.performances)
     result.performances = invoice.performances.map(enrichPerformance)
-    result.totalVolumeCredit = totalVolumeCredits(invoice.performances)
+
+    result.totalAmount = totalAmount(result.performances)
+    result.totalVolumeCredit = totalVolumeCredits(result.performances)
     return result
   }
 
-  function renderPlainText(data, invoice){
+  function renderPlainText(data){
     let result = `Statement for ${data.customer}\n`;
   
     for (let perf of data.performances) {
@@ -118,7 +121,7 @@ const invoices = [
 
   function statement (invoice) {
       const data = createStatementData(invoice)
-      return renderPlainText(data, invoice)
+      return renderPlainText(data)
   }
 
 window.onload = function(){
