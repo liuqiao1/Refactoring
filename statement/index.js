@@ -107,10 +107,10 @@ const invoices = [
   
     for (let perf of data.performances) {
       // print line for this order
-      result += `  ${perf.name}: ${perf.amount})} (${perf.audience} seats)\n`;
+      result += `  ${perf.name}: ${perf.amount} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${data.totalAmount})}\n`;
+    result += `Amount owed is ${data.totalAmount}\n`;
     result += `You earned ${data.totalVolumeCredit} credits\n`;
 
     return result;
