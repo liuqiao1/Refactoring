@@ -58,7 +58,7 @@ const invoices = [
             style: "currency", 
             currency: "USD",
             minimumFractionDigits: 2 
-        }).format(val);
+        }).format(val/100);
   }
 
   function volumeCreditFor(perf){
@@ -91,10 +91,10 @@ const invoices = [
   
     for (let perf of invoice.performances) {
       // print line for this order
-      result += `  ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
+      result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${usd(totalAmountFor(invoice.performances)/100)}\n`;
+    result += `Amount owed is ${usd(totalAmountFor(invoice.performances))}\n`;
     result += `You earned ${volumeCreditsFor(invoice.performances)} credits\n`;
 
     return result;
