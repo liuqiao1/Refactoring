@@ -10,9 +10,11 @@ function createStatementData(invoice){
 
 function enrichPerformance(aPerformance){
     const result = Object.assign({}, aPerformance);
+    const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance))
+    
     result.play = playFor(aPerformance)
     result.name = result.play.name
-    result.amount = amountFor(result)
+    result.amount = calculator.amount
     result.volumeCredits = volumeCreditsFor(result);
     return result;
 }
