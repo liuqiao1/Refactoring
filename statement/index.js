@@ -92,11 +92,8 @@ const invoices = [
       result += `  ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
     }
 
-    let totalAmount = totalAmountFor(invoice.performances)
-    result += `Amount owed is ${usd(totalAmount/100)}\n`;
-
-    let volumeCredits = volumeCreditsFor(invoice.performances);
-    result += `You earned ${volumeCredits} credits\n`;
+    result += `Amount owed is ${usd(totalAmountFor(invoice.performances)/100)}\n`;
+    result += `You earned ${volumeCreditsFor(invoice.performances)} credits\n`;
 
     return result;
   }
