@@ -61,6 +61,13 @@ const invoices = [
         }).format(val);
   }
 
+  function volumeCreditFor(perf){
+    let result = Math.max(perf.audience - 30, 0);
+    // add extra credit for every ten comedy attendees
+    if ("comedy" === playFor(perf).type) result = Math.floor(perf.audience / 5);
+    return result
+}
+
   function statement (invoice, plays) {
     let totalAmount = 0;
     let volumeCredits = 0;
@@ -68,14 +75,13 @@ const invoices = [
   
     for (let perf of invoice.performances) {
       // add volume credits
-      volumeCredits += Math.max(perf.audience - 30, 0);
-      // add extra credit for every ten comedy attendees
-      if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+      volumeCredits += volumeCreditFor(perf)
   
       // print line for this order
       result += `  ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
       totalAmount += amountFor(perf);
     }
+
     result += `Amount owed is ${usd(totalAmount/100)}\n`;
     result += `You earned ${volumeCredits} credits\n`;
     return result;
