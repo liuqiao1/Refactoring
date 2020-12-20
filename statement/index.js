@@ -96,13 +96,13 @@ const invoices = [
   }
 
   function createStatementData(invoice){
-    let result = {}
-    result.customer = invoice.customer
-    result.performances = invoice.performances.map(enrichPerformance)
+    let statementData = {}
+    statementData.customer = invoice.customer
+    statementData.performances = invoice.performances.map(enrichPerformance)
 
-    result.totalAmount = totalAmount(result.performances)
-    result.totalVolumeCredit = totalVolumeCredits(result.performances)
-    return result
+    statementData.totalAmount = totalAmount(statementData.performances)
+    statementData.totalVolumeCredit = totalVolumeCredits(statementData.performances)
+    return statementData
   }
 
   function renderPlainText(data){
