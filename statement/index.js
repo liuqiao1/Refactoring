@@ -68,7 +68,7 @@ const invoices = [
     return result
   }
 
-  function totalAmountFor(performances){
+  function totalAmount(performances){
       return performances
       .reduce((result, perf) => {
           result += amountFor(perf);
@@ -94,7 +94,7 @@ const invoices = [
       result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${usd(totalAmountFor(invoice.performances))}\n`;
+    result += `Amount owed is ${usd(totalAmount(invoice.performances))}\n`;
     result += `You earned ${totalVolumeCredits(invoice.performances)} credits\n`;
 
     return result;

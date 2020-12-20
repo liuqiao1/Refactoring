@@ -6,7 +6,7 @@ This repo records practices for《Refactoring》written by Martin Fowler.
 
 ### Chapter 1 — Refactoring: A First Example
 - variable name: aperformance, aNumber
-- volumCreditsFor 
+- volumCreditsFor => totalVolumeCredits
 - nested function
 - function name: XXXFor
 # Some useful links
