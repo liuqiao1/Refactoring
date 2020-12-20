@@ -93,7 +93,7 @@ const invoices = [
     return result;
   }
 
-  function getStatementData(invoice){
+  function createStatementData(invoice){
     let result = {}
     result.customer = invoice.customer
     result.totalAmount = totalAmount(invoice.performances)
@@ -117,7 +117,7 @@ const invoices = [
   }
 
   function statement (invoice) {
-      const data = getStatementData(invoice)
+      const data = createStatementData(invoice)
       return renderPlainText(data, invoice)
   }
 
