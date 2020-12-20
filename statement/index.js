@@ -87,16 +87,18 @@ const invoices = [
   }
 
   function enrichPerformance(aPerformance){
-    return aPerformance
+    const result = Object.assign({}, aPerformance);
+    result.name = playFor(aPerformance).name
+    result.amount = usd(amountFor(aPerformance))
+    return result;
   }
 
   function getStatementData(invoice){
     let result = {}
-      result.customer =  invoice.customer
-      result.totalAmount = usd(totalAmount(invoice.performances))
-      result.performances = invoice.performances.map(enrichPerformance)
-      result.totalVolumeCredit = totalVolumeCredits(invoice.performances)
-    //   return result
+    result.customer = invoice.customer
+    result.totalAmount = usd(totalAmount(invoice.performances))
+    result.performances = invoice.performances.map(enrichPerformance)
+    result.totalVolumeCredit = totalVolumeCredits(invoice.performances)
     return result
   }
 
@@ -105,7 +107,7 @@ const invoices = [
   
     for (let perf of data.performances) {
       // print line for this order
-      result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
+      result += `  ${perf.name}: ${perf.amount})} (${perf.audience} seats)\n`;
     }
 
     result += `Amount owed is ${data.totalAmount})}\n`;
@@ -117,17 +119,6 @@ const invoices = [
   function statement (invoice) {
       const data = getStatementData(invoice)
       return renderPlainText(data, invoice)
-    // let result = `Statement for ${invoice.customer}\n`;
-  
-    // for (let perf of invoice.performances) {
-    //   // print line for this order
-    //   result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
-    // }
-
-    // result += `Amount owed is ${usd(totalAmount(invoice.performances))}\n`;
-    // result += `You earned ${totalVolumeCredits(invoice.performances)} credits\n`;
-
-    // return result;
   }
 
 window.onload = function(){
